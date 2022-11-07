@@ -1,0 +1,17 @@
+{
+	"db_host": "192.168.10.15",
+	"db_user": "postgres",
+	"db_password": "postgres",
+	"db_name": "asmdb",
+	"db_port": 1101,
+	"stateService_address": "http://192.168.10.15:1113/api/stateservice/",
+	"repairsService_address": "http://192.168.10.15:1114/api/repairsservice/repairs/",
+	"token": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5kaXZpc2lvbnoucnUvYXBpL2lkZW50aXR5L2NsYWltcy9zeXNhZG1pbiI6IlRydWUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3lzdGVtIiwibmJmIjoxNjY2Nzg0MDg5LCJleHAiOjE2NjY4NDQxNDksImlzcyI6IkRpdmlzaW9ueiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTkzOTIifQ.Yfaga-MWEWWV07nNG8-n463YFzw-pJhouBtxhgbMXRfyUrU2IYVmC-VKu9PlRSpJM4NJfyb4SclnblTCCnmRzuy6u5Ux7BG8orm-h-gsKtiFmIj90_pM8HFBtwWaX_Mx-wmOetV_Lwa1gYjjAhVx1obmgwrkJbJ24AYKH9VtDdH948_np3V8lMJXbzMX6L69YI1GulResyw2VuYO3b__g602Ie-slEqU2fit3p02dKxO3XIQ5di_5bGHZnNcMTIkdP7l-EtWqPHICEol-9DTKAdk9P9ReIC2ic5Pn9lgLYD7h_bouks1QhAMg7lzX7OPdxkoWEhq9VwihEKikc-BJQ",
+	"cim_id_normal_true": "066d1608-a368-44de-9afa-33bd46a4e41b",
+	"dcAipCode_normal_true": "2fc94e33-9cf1-4e8a-ac66-2b99c7fac3b6",
+	"cim_id_normal_false": "4ab359c8-131c-4a71-ad6f-4b46335e7b28",
+	"dcAipCode_normal_false": "2fc94e33-9cf1-4e8a-ac66-2b99c7fac3b6",
+	"cim_id_breaker": "4ab359c8-131c-4a71-ad6f-4b46335e7b28",
+	"dcAipCode_breaker": "4ab359c8-131c-4a71-ad6f-4b46335e7b28",
+	"stateSourceId": "a7ce22c3-9eb6-41e0-8722-409ba48003ee"
+}
