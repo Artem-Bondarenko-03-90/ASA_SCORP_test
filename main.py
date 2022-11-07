@@ -42,7 +42,7 @@ class zvk(object):
         # необходимо из cim_id получить mrid
         if equipment_cim_id != None:
             mrid_request = db_request(host=self.db_host, user=self.db_user, password=self.db_password, database=self.db_name, port=self.db_port,
-                                       request_str="SELECT master_resource_identifier FROM equipment.equipment_base WHERE cim_id='"+str(equipment_cim_id)+"' LIMIT 1;")
+                                       request_str="SELECT master_resource_identifier FROM equipment.equipment_unit WHERE cim_id='"+str(equipment_cim_id)+"' LIMIT 1;")
             mrid = str(mrid_request.execute_request()[0][0])
 
             if mrid != "None":
@@ -161,12 +161,12 @@ class signal(object):
         self.cim_id = cim_id
         # необходимо из cim_id получить ScorpId
         scorpId_request = db_request(host=self.db_host, user=self.db_user, password=self.db_password, database=self.db_name, port=self.db_port,
-                                  request_str="SELECT id FROM equipment.equipment_base WHERE cim_id='" + str(cim_id) + "' LIMIT 1;")
+                                  request_str="SELECT id FROM equipment.equipment_unit WHERE cim_id='" + str(cim_id) + "' LIMIT 1;")
         scorpId = str(scorpId_request.execute_request()[0][0])
         self.scorpId = scorpId
         # необходимо из cim_id получить mrid
         mrid_request = db_request(host=self.db_host, user=self.db_user, password=self.db_password, database=self.db_name, port=self.db_port,
-                                     request_str="SELECT master_resource_identifier FROM equipment.equipment_base WHERE cim_id='" + str(
+                                     request_str="SELECT master_resource_identifier FROM equipment.equipment_unit WHERE cim_id='" + str(
                                          cim_id) + "' LIMIT 1;")
         mrid = str(mrid_request.execute_request()[0][0])
         self.mrid = mrid
