@@ -121,6 +121,10 @@ class zvk(object):
         zvk_json = json.loads(self.getZVK(guid))
         for z in zvk_json:
             z[param_name] = value
+
+            # для того чтобы заявка применилась при каждом обновлении меняем ей параметр totalRepDBeg
+            z['totalRepDBeg'] = str(datetime.now(timezone('Europe/Moscow')) - timedelta(days=1)).replace(' ', 'T')
+
             response = requests.post(url=str(self.zvk_address)+'zvk/merge?mergeOn=guid', data=b'['+json.dumps(z).encode('utf-8')+b']', headers=headers)
 
             if response.status_code != 200:
@@ -469,8 +473,8 @@ if __name__ == '__main__':
              db_host=db_host, db_user=db_user, db_password=db_password, db_name=db_name, db_port=db_port)
 
     z1.send_zvk()
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -498,8 +502,8 @@ if __name__ == '__main__':
     # изменим ранее созданную разрешенную, но не открытую заявку
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
 
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -528,8 +532,8 @@ if __name__ == '__main__':
     # изменим ранее созданную разрешенную, но не открытую заявку
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
 
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     timestamp_1 = str(datetime.now(timezone('Europe/Moscow')))
@@ -557,8 +561,8 @@ if __name__ == '__main__':
 
     # изменим ранее созданную разрешенную, но не открытую заявку
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -585,8 +589,8 @@ if __name__ == '__main__':
 
     # изменим ранее созданную разрешенную, но не открытую заявку
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     timestamp_1 = str(datetime.now(timezone('Europe/Moscow')))
@@ -615,8 +619,8 @@ if __name__ == '__main__':
 
     # изменим ранее созданную разрешенную, но не открытую заявку
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     timestamp_1 = str(datetime.now(timezone('Europe/Moscow')))
@@ -648,8 +652,8 @@ if __name__ == '__main__':
     z1.edit_zvk(z1.guid, 'workState', 'wsOpened')
     z1.edit_zvk(z1.guid, 'factRepDEnd', None)
     z1.edit_zvk(z1.guid, 'totalRepDEnd', None)
-    # подождем 10 сек
-    time.sleep(10)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -675,6 +679,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -701,6 +707,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk( z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -728,6 +736,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -754,6 +764,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -780,6 +792,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -810,6 +824,8 @@ if __name__ == '__main__':
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
     z1.edit_zvk(z1.guid, 'workState', 'wsClosed')
     z1.edit_zvk(z1.guid, 'factRepDEnd', str(signal_1.send_timestamp).replace(" ", "T"))
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -837,6 +853,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -863,6 +881,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -889,6 +909,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -916,6 +938,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -942,6 +966,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     timestamp_1 = str(datetime.now(timezone('Europe/Moscow')))
@@ -973,6 +999,8 @@ if __name__ == '__main__':
     z1.edit_zvk(z1.guid, 'workState', 'wsNone')
     z1.edit_zvk(z1.guid, 'userState', 'usDenyed')
     z1.edit_zvk(z1.guid, 'factRepDEnd', str(datetime.now(timezone('Europe/Moscow')) + timedelta(days=1)).replace(" ", "T"))
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -998,6 +1026,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -1028,6 +1058,8 @@ if __name__ == '__main__':
     z1.edit_zvk(z1.guid, 'userState', 'usNotViewed')
     z1.edit_zvk(z1.guid, 'workState', None)
     z1.edit_zvk(z1.guid, 'factRepDEnd', None)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -1054,6 +1086,8 @@ if __name__ == '__main__':
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'userState', 'usViewed')
     z1.edit_zvk(z1.guid, 'workState', 'wsOpened')
+    # подождем 60 сек
+    time.sleep(60)
 
 
     # сформируем сигнал оперативного отключения оборудования
@@ -1085,6 +1119,8 @@ if __name__ == '__main__':
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'userState', 'usDelayed')
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
 
     # сформируем сигнал аварийного отключения оборудования
@@ -1114,6 +1150,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -1142,6 +1180,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -1175,6 +1215,8 @@ if __name__ == '__main__':
     z1.edit_zvk(z1.guid, 'userState', 'usAllowed ')
     z1.edit_zvk(z1.guid, 'workState', 'wsClosed ')
     z1.edit_zvk(z1.guid, 'factRepDEnd', str(datetime.now(timezone('Europe/Moscow'))+timedelta(minutes=20)).replace(' ', 'T'))
+    # подождем 60 сек
+    time.sleep(60)
 
 
     # сформируем сигнал оперативного отключения оборудования
@@ -1204,6 +1246,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал аварийного отключения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_normal_true, stateSourceId,
@@ -1232,6 +1276,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
 
     # сформируем сигнал аварийного отключения оборудования
@@ -1261,6 +1307,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOff')
+    # подождем 60 сек
+    time.sleep(60)
 
 
     # сформируем сигнал оперативного включения оборудования
@@ -1290,6 +1338,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsOn')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -1318,6 +1368,8 @@ if __name__ == '__main__':
 
     # изменим открытую ранее заявку для предыдущего блока тестов
     z1.edit_zvk(z1.guid, 'zvkDeviceState', 'dsNone')
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал оперативного включения оборудования
     signal_1 = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_normal_true, stateSourceId,
@@ -1358,6 +1410,8 @@ if __name__ == '__main__':
     for z_guid in zvk_request.execute_request():
         z.edit_zvk(z_guid[0], "workState", "wsClosed")
         z.edit_zvk(z_guid[0], "factRepDEnd", timestamp_11)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал включения выключателя
     signal_breaker = signal(str(datetime.now(timezone('Europe/Moscow'))), True, cim_id_breaker, stateSourceId,
@@ -1521,6 +1575,8 @@ if __name__ == '__main__':
 
     z_breaker.send_zvk()
     z_breaker.edit_zvk(z_breaker.guid, 'factRepDEnd', None)
+    # подождем 60 сек
+    time.sleep(60)
 
     # сформируем сигнал отключения выключателя
     signal_breaker = signal(str(datetime.now(timezone('Europe/Moscow'))), False, cim_id_breaker, stateSourceId,
